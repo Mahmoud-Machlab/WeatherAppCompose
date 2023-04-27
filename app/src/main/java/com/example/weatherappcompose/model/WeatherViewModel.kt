@@ -23,12 +23,19 @@ class WeatherViewModel(val app: Context) : ViewModel() {
 
         viewModelScope.launch {
             _weatherData.value = weatherRepository.getWeater(city)
+           val t = _weatherData.value?.temp?.temp
+            if (t != null) {
+                _weatherData.value?.temp?.temp = t - 273.15
+
+            }
+
         }
     }
 
-    fun getImage() {
+     fun getImage() {
         viewModelScope.launch {
-            weatherRepository.getImage(_weatherImage, weatherData.value!!)
+            weatherRepository.getImage(_weatherImage, _weatherData.value!!)
         }
+
     }
 }

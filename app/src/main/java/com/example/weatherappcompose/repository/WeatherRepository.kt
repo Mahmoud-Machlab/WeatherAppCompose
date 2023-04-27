@@ -31,12 +31,15 @@ class WeatherRepository(val app:Context) {
         val appid = app.getString(R.string.api_key)
         val response = apiService.getWeatherData(city, id =  appid)
         if (response.isSuccessful){
+            Log.d("TAG", "getWeater: response vorhanden")
             return response.body()
         }
+        Log.d("TAG", "getWeater: response nicht vorhanden")
         return null
     }
 
     suspend fun getImage(liveData: MutableLiveData<Bitmap>, weatherData: WeatherData){
+        Log.d("TAG", "getImage: " + "$IMAGE_URL_STRING${weatherData.info[0].icon}$FILE_EXT")
         val imageCall = apiService.loadImage("$IMAGE_URL_STRING${weatherData.info[0].icon}$FILE_EXT")
         imageCall.enqueue(object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {

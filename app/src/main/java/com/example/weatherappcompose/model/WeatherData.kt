@@ -17,5 +17,5 @@ class Info (
 )
 
 class Temp(
-    val temp: Double
+    var temp: Double
 )

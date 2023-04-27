@@ -7,8 +7,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.currentCompositionLocalContext
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.weatherappcompose.model.WeatherViewModel
 import com.example.weatherappcompose.ui.WeatherScreen
 import com.example.weatherappcompose.ui.theme.WeatherAppComposeTheme
 
@@ -22,7 +24,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    WeatherScreen()
+                    WeatherScreen(WeatherViewModel(this))
                 }
             }
         }
@@ -34,6 +36,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     WeatherAppComposeTheme {
-        WeatherScreen()
+        WeatherScreen(WeatherViewModel(MainActivity()))
     }
 }
